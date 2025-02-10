@@ -1,0 +1,42 @@
+{
+  "name": "ef-test-azion",
+  "bucket": "",
+  "preset": "javascript",
+  "env": "production",
+  "prefix": "20250210195926",
+  "not-first-run": true,
+  "function": {
+    "id": 38700,
+    "name": "__DEFAULT__",
+    "file": ".edge/worker.js",
+    "args": "azion/args.json",
+    "instance-id": 37063,
+    "instance-name": "__DEFAULT__",
+    "cache-id": 211687
+  },
+  "application": {
+    "id": 1739217452,
+    "name": "__DEFAULT__"
+  },
+  "domain": {
+    "id": 1739219067,
+    "name": "ef-test-azion",
+    "domain_name": "s68rmr5etu.map.azionedge.net",
+    "url": "https://s68rmr5etu.map.azionedge.net"
+  },
+  "rt-purge": {
+    "purge_on_publish": true
+  },
+  "origin": [],
+  "rules-engine": {
+    "created": false,
+    "rules": [
+      {
+        "id": 364582,
+        "name": "Execute Edge Function",
+        "phase": "request"
+      }
+    ]
+  },
+  "cache-settings": []
+}

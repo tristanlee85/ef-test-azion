@@ -1,4 +1,4 @@
-import  * as cheerio  from "cheerio";
+import * as cheerio from "cheerio";
 
 async function handleRequest(request, args) {
   const url = new URL(request.url);
@@ -18,14 +18,22 @@ async function handleRequest(request, args) {
   const headers = new Headers(response.headers);
   
   console.log(`Incoming request: ${url.toString()} -> ${originUrl.toString()}`);
+  
   if (url.pathname === "/") {
     const bodyText = await response.text();
     const $ = cheerio.load(bodyText);
-    
     $('title').text('My Custom Title');
-
+    const notice = $('<div>')
+      .text('This page has been modified by Azion EF!')
+      .attr('style', 'background: #ffeb3b; color: #000; text-align: center; padding: 10px; font-weight: bold;');
+    $('body').prepend(notice);
+    $('script[src*="analytics"]').remove();
+    $('h1').each((i, el) => {
+      const text = $(el).text();
+      $(el).text(text.replace(/Google/g, 'Azion EF'));
+    });
+    $('head').append('<meta name="modified-by" content="Azion EF">');
     const modifiedBody = $.html();
-    
     headers.delete("content-length");
     
     return new Response(modifiedBody, {
@@ -35,7 +43,7 @@ async function handleRequest(request, args) {
     });
   }
   
-  return response
+  return response;
 }
 
 export { handleRequest };

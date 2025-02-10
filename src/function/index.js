@@ -33,8 +33,12 @@ async function handleRequest(request, args) {
       $(el).text(text.replace(/Google/g, 'Azion EF'));
     });
     $('head').append('<meta name="modified-by" content="Azion EF">');
+
     const modifiedBody = $.html();
     headers.delete("content-length");
+
+    // Set a 15m cache-control header for edge caching
+    headers.set("cache-control", "public, max-age=900");
     
     return new Response(modifiedBody, {
       status: response.status,
